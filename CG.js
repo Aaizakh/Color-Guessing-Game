@@ -1,8 +1,8 @@
-var NumSquares = 6;
+var NumCircles = 6;
 var colors =[];
 var pickedColor;
 
-var squares = document.querySelectorAll(".square");
+var circles = document.querySelectorAll(".circle");
 var titleColor = document.querySelector("#titleColor");
 var selectionR = document.querySelector("#selectionR");
 var h1 = document.querySelector("h1");
@@ -13,7 +13,7 @@ init();
 function init(){
 	//mode button event listeners
 	setupModeButtons();
-	setupSquares();
+	setupCircles();
 	reset();
 }
 
@@ -25,22 +25,22 @@ function setupModeButtons(){
 			modeButtons[1].classList.remove("selected");
 			this.classList.add("selected");
 
-			//if the text Content is Easy, its 3 squares, otherwise its 6 squares
-			this.textContent === "EASY" ? NumSquares = 3: NumSquares = 6;
+			//if the text Content is Easy, its 3 circles, otherwise its 6 circles
+			this.textContent === "EASY" ? NumCircles = 3: NumCircles = 6;
 			reset();
 		});
 	}
 }
 
-function setupSquares(){
-	for (var i=0; i<squares.length;i++){
-		squares[i].addEventListener("click", function(){
+function setupCircles(){
+	for (var i=0; i<circles.length;i++){
+		circles[i].addEventListener("click", function(){
 			//save the clicked color into a variable
 			var clickedColor  = this.style.backgroundColor;
 			if (clickedColor === pickedColor){
 				ResetB.innerHTML="Play Again?  "
 				 selectionR.innerHTML = "CORRECT!"
-				 //Once the correct color is clicked, change the color of all the squares to that color
+				 //Once the correct color is clicked, change the color of all the circles to that color
 				 changeColors(pickedColor);
 				 //change the h1 color
 				 h1.style.background=pickedColor;
@@ -56,7 +56,7 @@ function setupSquares(){
 
 function reset(){
 		//Generate the array with colors
-		colors = generateRColors(NumSquares);
+		colors = generateRColors(NumCircles);
 		//pick a target color
 		pickedColor = pickColor();
 		titleColor.innerHTML=pickedColor;
@@ -66,16 +66,16 @@ function reset(){
 		ResetButton.textContent = "New Colors?";
 		h1.style.backgroundColor="steelblue"
 
-		//Decide how many squares to display
-		for (var i=0; i<squares.length;i++){
+		//Decide how many circles to display
+		for (var i=0; i<circles.length;i++){
 			//If a color exists (not undefined) then show all
 			if (colors[i]){
-				squares[i].style.display = "block";
-				squares[i].style.background = colors[i];
+				circles[i].style.display = "block";
+				circles[i].style.background = colors[i];
 			}
-			//if a color is undefined for that number (i.e. 3-6) then hide the square
+			//if a color is undefined for that number (i.e. 3-6) then hide the circle
 			else {
-				squares[i].style.display = "none";
+				circles[i].style.display = "none";
 			}
 
 		}
@@ -98,13 +98,13 @@ function generateEachColor() {
 
 
 function changeColors(correctColor){
-	for (var i=0; i<squares.length;i++){
-		squares[i].style.backgroundColor=correctColor;
+	for (var i=0; i<circles.length;i++){
+		circles[i].style.backgroundColor=correctColor;
 	}
 }
 
 function pickColor() {
-	//Only picks colors from the updated the color array (either 1-3 or 1-6) because of the Numsquares variable
+	//Only picks colors from the updated the color array (either 1-3 or 1-6) because of the Numcircles variable
 	var random = Math.floor(Math.random() * colors.length);
 	return colors[random];
 }
